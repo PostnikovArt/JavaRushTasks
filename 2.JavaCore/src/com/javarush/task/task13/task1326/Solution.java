@@ -6,74 +6,46 @@ package com.javarush.task.task13.task1326;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Solution {
     public static void main(String[] args) {
         // напишите тут ваш код
-
-        ArrayList<String> allNumbers = new ArrayList<>();
-
-        BufferedReader nameFileReader = null;
-        String nameFile = null;
+//        String fileName = "/home/artic/Tests/test3";
+        String fileName = null;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            nameFileReader = new BufferedReader(new InputStreamReader(System.in));
-            nameFile = nameFileReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            nameFileReader.close();
+            fileName = reader.readLine();
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        FileInputStream fileInputStream = null;
-        BufferedReader fileReader = null;
-        try {
-            fileInputStream = new FileInputStream(nameFile);
-            while (fileInputStream.available() != -1) {
-                fileReader = new BufferedReader(new InputStreamReader(fileInputStream));
-                String buffer = fileReader.readLine();
-                System.out.println(buffer);
-                allNumbers.add(buffer);
+
+        StringBuilder builder = new StringBuilder();
+        try (FileInputStream inputStream = new FileInputStream(fileName)) {
+            while (inputStream.available() > 0) {
+                int b = inputStream.read();
+                builder.append((char)b);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String[] strings = builder.toString().split("\\s");
 
-        for (String numbers : allNumbers) {
-            System.out.println(" 1 " + numbers);
-            char[] charsNumbers = numbers.toCharArray();
-            System.out.println(" 2 " + charsNumbers);
-            for (char number : charsNumbers) {
-                int i = number;
-                if (i%2 == 0) {
-                    System.out.println(i);
-                }
+        ArrayList<Integer> result = new ArrayList<>();
+        for (String current : strings) {
+            if (!current.isEmpty()) {
+                int i = Integer.parseInt(current);
+                if (i%2 == 0) result.add(i);
             }
         }
+        Collections.sort(result);
 
-        //     /home/artic/Tests/properties2
-//
-//        BufferedReader fileReader = null;
-//        try {
-//            fileReader = new BufferedReader(new FileReader(nameFile));
-//            String buffer = fileReader.readLine();
-//            allNumbers.add(buffer);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            fileReader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
+        for (Integer integer : result) {
+            System.out.println(integer);
+        }
     }
-
 }
