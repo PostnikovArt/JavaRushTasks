@@ -1,18 +1,13 @@
 package com.javarush.task.task14.task1421;
 
-public final class Singleton {
-    private static Singleton instance = null;
+public class Singleton {
+    private static Singleton instance;
 
     private Singleton() {
-        if (instance.equals(null)) {
-            this.instance = new Singleton();
-        }
     }
 
     public static Singleton getInstance() {
-        if (instance.equals(null)) {
-            new Singleton();
-        }
+        if (instance == null) instance = new Singleton();
         return instance;
     }
 }
