@@ -12,13 +12,12 @@ public class Solution {
         Counter counter4 = new Counter();
 
         counter1.start();
-        counter2.start();
-        counter3.start();
-        counter4.start();
-
         counter1.join();
+        counter2.start();
         counter2.join();
+        counter3.start();
         counter3.join();
+        counter4.start();
         counter4.join();
 
         for (int i = 1; i <= 100; i++) {
@@ -53,11 +52,10 @@ public class Solution {
                 synchronized (values) {
                     incrementCount();
                     values[getCount()]++;
-//                    System.out.println(values[getCount()]);
                 }
 
-//                try {                //при заккоментировании рога отрабатывает как надо о валик не принимает без join
-//                    Thread.sleep(1);  // если поток спит то другие не успевают корректно отработать по условию getCount() < 100
+//                try {
+//                    Thread.sleep(1);
 //                } catch (InterruptedException e) {
 //                }
             } while (getCount() < 100);

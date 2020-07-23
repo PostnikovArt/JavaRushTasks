@@ -37,15 +37,13 @@ public class Solution {
         @Override
         public void refreshAllData(Map criteria) {
             List<Task> list = MockDB.getFakeTasks(criteria);
-            tasks.addAll(list);
-        }
+            tasks = MockDB.getFakeTasks(criteria);        }
     }
     private class NameDataProvider implements DbDataProvider<String> {
 
         @Override
         public void refreshAllData(Map criteria) {
-            List<String> list = MockDB.getFakeNames(criteria);
-            names.addAll(list);
-        }
+//            List<String> list = MockDB.getFakeNames(criteria);
+            names = MockDB.getFakeNames(criteria);        }
     }
 }
