@@ -4,13 +4,20 @@ import java.text.ChoiceFormat;
 import java.text.Format;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 /* 
 Знания - сила!
 */
 public class Solution {
     public static void main(String[] args) {
+        // заполняет список эл-тов  MAPами  Stock(String name, String symbol, double open, double last)
+        //                          new Stock("Fake Apple Inc.",   "AAPL",     125.64,    123.43)
+        // вторая половина Stock(String name, String symbol, double open, double last)
+        //     new Stock("Fake Sirius Satellite", "SIRI",      -.03,     getRandomDate())
         List<Stock> stocks = getStocks();
+
+
         sort(stocks);
         Date actualDate = new Date();
         printStocks(stocks, actualDate);
