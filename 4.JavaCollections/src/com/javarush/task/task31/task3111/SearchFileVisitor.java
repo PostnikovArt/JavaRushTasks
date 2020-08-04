@@ -57,25 +57,22 @@ public class SearchFileVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         byte[] content = Files.readAllBytes(file); // размер файла: content.length
 
+        if ( ! file.getFileName().toString().contains(getPartOfName())) return FileVisitResult.CONTINUE;
+        if ( ! (content.length > getMinSize())) return FileVisitResult.CONTINUE;
+        if ( ! (content.length < getMaxSize())) return FileVisitResult.CONTINUE;
 
-        if (file.toFile().getName().contains(getPartOfName())
-                && (content.length > getMinSize()) && content.length < getMaxSize()) {
 
-            List<String> strings = Files.readAllLines(file);
-            StringBuilder stringBuilder = new StringBuilder();
+//            List<String> strings = Files.readAllLines(file);
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for (String string : strings) {
+//                stringBuilder.append(string + " ");
+//            }
 
-            for (String string : strings) {
-                stringBuilder.append(string + " ");
-            }
-
-            if (stringBuilder.toString().contains(getPartOfContent())) {
+            if (new String(content).contains(getPartOfContent())) {
                 foundFiles.add(file);
-            }
-        }
-//        if (file.toFile().getName().contains(getPartOfName()) && stringBuilder.toString().contains(getPartOfContent())
-//                && (content.length > getMinSize()) && content.length < getMaxSize()) {
-//            foundFiles.add(file);
-//        }
+            }else return FileVisitResult.CONTINUE;
+
+
 
         return super.visitFile(file, attrs);
     }

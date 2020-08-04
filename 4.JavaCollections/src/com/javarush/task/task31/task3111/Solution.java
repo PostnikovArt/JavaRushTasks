@@ -19,7 +19,7 @@ public class Solution {
         searchFileVisitor.setMinSize(500); ///500
         searchFileVisitor.setMaxSize(10000);
 
-        //Files.walkFileTree(Paths.get("/home/artic/IdeaProjects/Tests"), searchFileVisitor);
+//        Files.walkFileTree(Paths.get("/home/artic/IdeaProjects/Tests"), searchFileVisitor);
         Files.walkFileTree(Paths.get("D:/SecretFolder"), searchFileVisitor);
 
         List<Path> foundFiles = searchFileVisitor.getFoundFiles();
