@@ -1,6 +1,5 @@
 package com.javarush.task.task20.task2027;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /* 
@@ -15,59 +14,42 @@ public class Solution {
                 {'m', 'l', 'p', 'r', 'r', 'h'},
                 {'p', 'o', 'e', 'e', 'j', 'j'}
         };
-
+        detectAllWords(crossword, "home", "same");
         /*
 Ожидаемый результат
 home - (5, 3) - (2, 0)
 same - (1, 1) - (4, 1)
          */
 
-        //System.out.println((char)crossword[4][1]);
-        detectAllWords(crossword, "home", "same");
+//        System.out.println((char) crossword[0][0]);
+//        System.out.println((char) crossword[1][1]);
+//        System.out.println((char) crossword[2][2]);
+//        System.out.println((char) crossword[3][3]);
+//
+//        System.out.println((char) crossword[0][0]);
+//        System.out.println((char) crossword[1][0]);
+//        System.out.println((char) crossword[2][0]);
+//        System.out.println((char) crossword[3][0]);
     }
 
     public static List<Word> detectAllWords(int[][] crossword, String... words) {
-        /*   метод был пуст   */
-        ArrayList<String> allStrings = new ArrayList<>();
-
-        /* horizontal rows */
-        for (int i = 0; i < crossword.length; i++) {
-            //System.out.print(" " + i + " - ");
-            StringBuilder stringBuilderHorizontal = new StringBuilder();
-            for (int j = 0; j < crossword[i].length; j++) {
-                stringBuilderHorizontal.append((char)crossword[i][j]);
-                //System.out.print((char)crossword[i][j] + " / ");
-            }
-            allStrings.add(stringBuilderHorizontal.toString());
-            allStrings.add(stringBuilderHorizontal.reverse().toString());
-            //System.out.println();
-        }
-
-        /* vertical columns */
-        int crosswordLineLengthMAX = 0;
-        for (int i = 0; i < crossword.length; i++) {
-            if (crossword[i].length > crosswordLineLengthMAX)
-                crosswordLineLengthMAX = crossword[i].length;
-        }
-        for (int j = 0; j < crosswordLineLengthMAX; j++) {
-
-            for (int i = 0; i < crossword.length; i++) {
-                if (j < crossword[i].length) {
-                System.out.print((char) crossword[i][j]);
-                }
+        //horizontal
+//        for (int i = 0; i < crossword.length; i++) {
+//            for (int j = 0; j < crossword[i].length; j++) {
+//                System.out.print((char) crossword[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+        //vertical
+        for (int i = 0; i < crossword[0].length; i++) {
+            for (int j = 0; j < crossword.length; j++) {
+                System.out.print((char) crossword[j][i] + " ");
             }
             System.out.println();
         }
 
-        /* diagonal rows */
-        for (int i = 0; i < crossword.length; i++) {
-
-        }
 
 
-//        for (String allString : allStrings) {
-//            System.out.println(allString);
-//        }
         return null;
     }
 

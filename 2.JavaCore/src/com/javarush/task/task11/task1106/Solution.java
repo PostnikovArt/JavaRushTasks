@@ -6,13 +6,12 @@ package com.javarush.task.task11.task1106;
 
 public class Solution {
     public static void main(String[] args) {
-        //vot tak vot
     }
 
     public class Cat {
-        public String name;
-        public int age;
-        public int weight;
+        private String name;
+        private int age;
+        private int weight;
 
         public Cat() {
         }

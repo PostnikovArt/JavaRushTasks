@@ -31,14 +31,14 @@ public class Solution {
         String fileName = null;
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            //fileName = bufferedReader.readLine();
+            fileName = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("/home/artic/IdeaProjects/Tests/test1"))) {
-//        try  BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader("/home/artic/IdeaProjects/Tests/test1"))) {
+        try  (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             while (reader.ready()) {
 
 //                String result = reader.readLine();
@@ -50,10 +50,13 @@ public class Solution {
 
                 for (int i = 0; i < buffer.length; i++) {
 
-                    if ( buffer[i].matches(" ")) {
+                    if ( buffer[i].matches("^\\d*\\d$")) {
+                        Integer a = Integer.parseInt(buffer[i]);
+
                         for (Map.Entry<Integer, String> entry : map.entrySet()) {
-                            if (Integer.parseInt(buffer[i]) == entry.getKey()) {
+                            if (a == entry.getKey()) {
                                 buffer[i] = entry.getValue();
+                                break;
                             }
                         }
                     }
