@@ -1,10 +1,8 @@
 package com.javarush.task.task31.task3106;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /*
@@ -12,49 +10,46 @@ import java.util.zip.ZipInputStream;
 */
 public class Solution {
     public static void main(String[] args) {
-
-        ZipInputStream zipInputStream = null;
-        FileOutputStream outputStream = null;
-
         String resultFileName = args[0];
 
-        ArrayList<InputStream> parts = new ArrayList<>();
+        Arrays.sort(args,1, args.length-1);
+        List<String> allFiles = new LinkedList<>();
         for (int i = 1; i < args.length; i++) {
+            allFiles.add(args[i]);
+        }
+        allFiles.sort(String::compareTo);   //пока не сделал сортировку по String не работало
+
+        List<InputStream> inputStreams = new LinkedList<>();
+        for (String file : allFiles) {
             try {
-                parts.add(new FileInputStream(args[i]));
+                inputStreams.add(new FileInputStream(file));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        SequenceInputStream sequenceInputStream = new SequenceInputStream(Collections.enumeration(parts));
-        zipInputStream = new ZipInputStream(sequenceInputStream);
+        FileOutputStream outputStream;
+        ZipInputStream zin;
+
+        SequenceInputStream sequenceInputStream = new SequenceInputStream(Collections.enumeration(inputStreams));
+        zin = new ZipInputStream(sequenceInputStream);
 
         byte[] buffer = new byte[8192];
         try {
             outputStream = new FileOutputStream(resultFileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        while (true) {
-            try {
-                if ((zipInputStream.getNextEntry() == null)) break;
-
+            while (zin.getNextEntry() != null) {
                 int b = 0;
-                while ((b = zipInputStream.read(buffer)) != -1) {
+                while ((b = zin.read(buffer)) != -1) {
                     outputStream.write(buffer, 0, b);
                 }
-
-                zipInputStream.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-        }
-        try {
+            outputStream.flush();
             outputStream.close();
+            zin.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
