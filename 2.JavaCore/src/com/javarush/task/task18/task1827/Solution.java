@@ -15,6 +15,7 @@ public class Solution {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String fileName = bufferedReader.readLine();
+        bufferedReader.close();
 
         int maxID = 0;
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
