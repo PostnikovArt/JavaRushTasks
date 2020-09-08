@@ -9,5 +9,7 @@ public interface Model {
     void loadDeletedUsers();
 
     void loadUserById(long userId);
+
+    public void deleteUserById(long id);
 }
 

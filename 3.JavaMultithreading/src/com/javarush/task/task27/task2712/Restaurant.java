@@ -11,8 +11,6 @@ public class Restaurant {
         Tablet tablet = new Tablet(1);
         tablet.addObserver(cook);
         tablet.createOrder();
-        tablet.createOrder();
-        tablet.createOrder();
-        tablet.createOrder();
+
     }
 }

@@ -21,10 +21,10 @@ public class Tablet extends Observable {
         try {
             order = new Order(this);
             if ( ! order.isEmpty()) {
-                ConsoleHelper.writeMessage(order.toString());
                 AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime() * 60);
                 manager.processVideos();
                 setChanged();
+                ConsoleHelper.writeMessage(order.toString());
                 notifyObservers(order);
             }
         } catch (NoVideoAvailableException e) {
